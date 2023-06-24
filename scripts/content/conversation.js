@@ -299,9 +299,9 @@ function addConversationsEventListeners(conversationId) {
       chrome.storage.local.get(['conversations', 'settings', 'models'], (result) => {
         const conversation = result.conversations[conversationId];
         const messageId = button.id.split('edit-button-').pop();
-        const existingActionDiv = document.querySelector(`#action - div - ${messageId}`);
+        const existingActionDiv = document.querySelector(`#action-div-${messageId}`);
         if (existingActionDiv) return;
-        const oldElement = document.querySelector(`#message - text - ${messageId}`);
+        const oldElement = document.querySelector(`#message-text-${messageId}`);
         const userInput = oldElement.innerText;
         const textArea = document.createElement('textarea');
         textArea.classList = 'm-0 resize-none border-0 bg-transparent p-0 focus:ring-0 focus-visible:ring-0';
@@ -332,7 +332,7 @@ function addConversationsEventListeners(conversationId) {
           textArea.parentElement.replaceChild(newElement, textArea);
           actionDiv.remove();
           // if (newMessage.trim() !== userInput.trim()) {
-          const messageWrapper = document.querySelector(`#message - wrapper - ${messageId} `);
+          const messageWrapper = document.querySelector(`#message-wrapper-${messageId} `);
           messageWrapper.id = `message - wrapper - ${newMessageId} `;
           const parent = messageWrapper.previousElementSibling;
           // default parentId to root message
@@ -343,11 +343,11 @@ function addConversationsEventListeners(conversationId) {
             messageWrapper.nextElementSibling.remove();
           }
           // messageWrapper.remove();
-          const threadCountWrapper = messageWrapper.querySelector(`#thread - count - wrapper - ${messageId} `);
+          const threadCountWrapper = messageWrapper.querySelector(`#thread-count-wrapper-${messageId} `);
           const [, childCount] = threadCountWrapper.textContent.split(' / ');
-          const threadPrevButton = messageWrapper.querySelector(`#thread - prev - button - ${messageId} `);
+          const threadPrevButton = messageWrapper.querySelector(`#thread-prev-button-${messageId} `);
           threadPrevButton.disabled = false;
-          const threadNextButton = messageWrapper.querySelector(`#thread - next - button - ${messageId} `);
+          const threadNextButton = messageWrapper.querySelector(`#thread-next-button-${messageId} `);
           threadNextButton.disabled = true;
           threadCountWrapper.innerText = `${parseInt(childCount, 10) + 1} / ${parseInt(childCount, 10) + 1}`;
           const threadButtonsWrapper = messageWrapper.querySelector(`#thread-buttons-wrapper-${messageId}`);
